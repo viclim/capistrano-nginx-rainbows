@@ -3,7 +3,7 @@ pid "<%= fetch(:rainbows_pid) %>"
 stderr_path "<%= fetch(:rainbows_log) %>"
 stdout_path "<%= fetch(:rainbows_log) %>"
 
-listen '<%= "/home/#{fetch(:user)}/apps/#{fetch(:application)}/shared/tmp/rainbows.sock"'
+listen '<%= "/home/#{fetch(:user)}/apps/#{fetch(:application)}/shared/tmp/rainbows.sock" %>'
 worker_processes <%= fetch(:rainbows_workers) %>
 timeout 30
 
