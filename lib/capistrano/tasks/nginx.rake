@@ -1,6 +1,6 @@
-require 'capistrano/nginx_unicorn/helpers'
+require 'capistrano/nginx_rainbows/helpers'
 
-include Capistrano::NginxUnicorn::Helpers
+include Capistrano::NginxRainbows::Helpers
 
 namespace :nginx do
   desc "Setup nginx configuration"

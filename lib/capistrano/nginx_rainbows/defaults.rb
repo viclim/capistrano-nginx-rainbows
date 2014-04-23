@@ -10,10 +10,11 @@ set :nginx_ssl_certificate_local_path, -> { ask(:nginx_ssl_certificate_local_pat
 set :nginx_ssl_certificate_key_local_path, -> { ask(:nginx_ssl_certificate_key_local_path, "Local path to ssl certificate key: ") }
 set :nginx_config_path, "/etc/nginx/sites-available"
 
-set :unicorn_service_name, -> { "unicorn_#{fetch(:application)}_#{fetch(:stage)}" }
-set :unicorn_pid, -> { shared_path.join("pids/unicorn.pid") }
-set :unicorn_config, -> { shared_path.join("config/unicorn.rb") }
-set :unicorn_log, -> { shared_path.join("log/unicorn.log") }
-set :unicorn_user, -> { fetch(:user) }
-set :unicorn_workers, 2
+set :rainbows_bin, -> { 'rainbows' }
+set :rainbows_service_name, -> { "rainbows_#{fetch(:application)}_#{fetch(:stage)}" }
+set :rainbows_pid, -> { shared_path.join("pids/rainbows.pid") }
+set :rainbows_config, -> { shared_path.join("config/rainbows.rb") }
+set :rainbows_log, -> { shared_path.join("log/rainbows.log") }
+set :rainbows_user, -> { fetch(:user) }
+set :rainbows_workers, 2
 set :sudo, "sudo"

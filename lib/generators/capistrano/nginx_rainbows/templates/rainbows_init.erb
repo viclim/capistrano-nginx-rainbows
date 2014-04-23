@@ -1,30 +1,30 @@
 #!/bin/bash
 ### BEGIN INIT INFO
-# Provides: unicorn
+# Provides: rainbows
 # Required-Start: $remote_fs $syslog
 # Required-Stop: $remote_fs $syslog
 # Default-Start: 2 3 4 5
 # Default-Stop: 0 1 6
-# Short-Description: Manage unicorn server
-# Description: Start, stop, restart unicorn server for a specific application.
+# Short-Description: Manage rainbows server
+# Description: Start, stop, restart rainbows server for a specific application.
 ### END INIT INFO
 set -e
 
 # Feel free to change any of the following variables for your app:
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=<%= current_path %>
-PID=<%= fetch(:unicorn_pid) %>
+PID=<%= fetch(:rainbows_pid) %>
 
 # no rvm and no rbenv
-CMD="cd $APP_ROOT; bundle exec unicorn -D -c <%= fetch(:unicorn_config) %> -E <%= fetch(:rails_env) %>"
+CMD="cd $APP_ROOT; bundle exec <%= fetch(:rainbows_bin) -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env) %>"
 
 # rvm
-#CMD="cd <%= current_path %>; <%= fetch(:rvm_path) %>/bin/rvm do bundle exec unicorn -D -c <%= fetch(:unicorn_config) %> -E <%= fetch(:rails_env) %>"
+#CMD="cd <%= current_path %>; <%= fetch(:rvm_path) %>/bin/rvm do bundle exec rainbows -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env) %>"
 
 # rbenv TODO
-# doesn't work CMD="cd <%= current_path %>; bundle exec unicorn -D -c <%= fetch(:unicorn_config) %> -E <%= fetch(:rails_env) %>"
+# doesn't work CMD="cd <%= current_path %>; bundle exec rainbows -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env) %>"
 
-AS_USER=<%= fetch(:unicorn_user) %>
+AS_USER=<%= fetch(:rainbows_user) %>
 set -u
 
 OLD_PIN="$PID.oldbin"
@@ -91,4 +91,3 @@ reopen-logs)
   exit 1
   ;;
 esac
-

@@ -1,5 +1,5 @@
 namespace :logrotate do
-  desc "Setup logs rotation for nginx and unicorn"
+  desc "Setup logs rotation for nginx and rainbows"
   task :setup do
     on roles(:web, :app) do
       logrotate_config = "#{fetch(:application)}_#{fetch(:stage)}"

@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in capistrano-nginx-unicorn.gemspec
+# Specify your gem's dependencies in capistrano-nginx-rainbows.gemspec
 gemspec

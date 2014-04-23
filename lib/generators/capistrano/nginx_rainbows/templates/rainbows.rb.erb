@@ -1,10 +1,10 @@
 working_directory "<%= current_path %>"
-pid "<%= fetch(:unicorn_pid) %>"
-stderr_path "<%= fetch(:unicorn_log) %>"
-stdout_path "<%= fetch(:unicorn_log) %>"
+pid "<%= fetch(:rainbows_pid) %>"
+stderr_path "<%= fetch(:rainbows_log) %>"
+stdout_path "<%= fetch(:rainbows_log) %>"
 
-listen "/tmp/unicorn.<%= fetch(:nginx_config_name) %>.sock"
-worker_processes <%= fetch(:unicorn_workers) %>
+listen "/tmp/rainbows.<%= fetch(:nginx_config_name) %>.sock"
+worker_processes <%= fetch(:rainbows_workers) %>
 timeout 30
 
 preload_app true
@@ -19,7 +19,7 @@ before_fork do |server, worker|
     ActiveRecord::Base.connection.disconnect!
   end
 
-  # Quit the old unicorn process
+  # Quit the old rainbows process
   old_pid = "#{server.config[:pid]}.oldbin"
   if File.exists?(old_pid) && server.pid != old_pid
     begin

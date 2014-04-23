@@ -1,13 +1,13 @@
-# Capistrano-Nginx-Unicorn
+# Capistrano-Nginx-Rainbows
 
-Capistrano tasks for configuration and management nginx+unicorn combo for zero downtime deployments of Rails applications.
+Capistrano tasks for configuration and management nginx+rainbows combo for zero downtime deployments of Rails applications.
 
 Provides capistrano tasks to:
 
 * easily add application to nginx and reload it's configuration
-* create unicorn init script for application, so it will be automatically started when OS restarts
-* start/stop unicorn (also can be done using `sudo service unicorn_<your_app> start/stop`)
-* reload unicorn using `USR2` signal to load new application version with zero downtime
+* create rainbows init script for application, so it will be automatically started when OS restarts
+* start/stop rainbows (also can be done using `sudo service rainbows_<your_app> start/stop`)
+* reload rainbows using `USR2` signal to load new application version with zero downtime
 * creates logrotate record to rotate application logs
 
 Provides several capistrano variables for easy customization.
@@ -17,7 +17,7 @@ Also, for full customization, all configs can be copied to the application using
 
 Add this line to your application's Gemfile:
 
-    gem 'capistrano-nginx-unicorn', group: :development
+    gem 'capistrano-nginx-rainbows', group: :development
 
 And then execute:
 
@@ -25,13 +25,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install capistrano-nginx-unicorn
+    $ gem install capistrano-nginx-rainbows
 
 ## Usage
 
 Add this line to your `Capfile`
 
-    require 'capistrano/nginx_unicorn'
+    require 'capistrano/nginx_rainbows'
 
 You can check that new tasks are available (`cap -T`):
 
@@ -46,24 +46,24 @@ for nginx:
     # reload nginx configuration
     cap nginx:reload
 
-and for unicorn:
+and for rainbows:
 
-    # create unicorn init script
-    cap unicorn:setup_initializer
+    # create rainbows init script
+    cap rainbows:setup_initializer
 
-    # create unicorn configuration file
-    cap unicorn:setup_app_config
+    # create rainbows configuration file
+    cap rainbows:setup_app_config
 
-    # start unicorn
-    cap unicorn:start
+    # start rainbows
+    cap rainbows:start
 
-    # stop unicorn
-    cap unicorn:stop
+    # stop rainbows
+    cap rainbows:stop
 
-    # reload unicorn with no downtime
+    # reload rainbows with no downtime
     # old workers will process new request until new master is fully loaded
     # then old workers will be automatically killed and new workers will start processing requests
-    cap unicorn:restart
+    cap rainbows:restart
 
 and shared:
 
@@ -71,13 +71,13 @@ and shared:
     cap logrotate:setup
 
 ### Hooks
-`nginx:reload`, `unicorn:restart` are hooked to `deploy:publishing`
+`nginx:reload`, `rainbows:restart` are hooked to `deploy:publishing`
 
 ## Customization
 
 ### Using variables
 
-You can customize nginx and unicorn configs using capistrano variables:
+You can customize nginx and rainbows configs using capistrano variables:
 
 
 ```
@@ -117,25 +117,25 @@ set :nginx_ssl_certificate_key, "#{nginx_server_name}.key"
 # default value: `/etc/nginx/sites-available`
 set :nginx_config_path, "/etc/nginx/sites-available"
 
-# path, where unicorn pid file will be stored
-# default value: `"#{current_path}/tmp/pids/unicorn.pid"`
-set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
+# path, where rainbows pid file will be stored
+# default value: `"#{current_path}/tmp/pids/rainbows.pid"`
+set :rainbows_pid, "#{current_path}/tmp/pids/rainbows.pid"
 
-# path, where unicorn config file will be stored
-# default value: `"#{shared_path}/config/unicorn.rb"`
-set :unicorn_config, "#{shared_path}/config/unicorn.rb"
+# path, where rainbows config file will be stored
+# default value: `"#{shared_path}/config/rainbows.rb"`
+set :rainbows_config, "#{shared_path}/config/rainbows.rb"
 
-# path, where unicorn log file will be stored
-# default value: `"#{shared_path}/config/unicorn.rb"`
-set :unicorn_log, "#{shared_path}/config/unicorn.rb"
+# path, where rainbows log file will be stored
+# default value: `"#{shared_path}/config/rainbows.rb"`
+set :rainbows_log, "#{shared_path}/config/rainbows.rb"
 
-# user name to run unicorn
+# user name to run rainbows
 # default value: `user` (user varibale defined in your `deploy.rb`)
-set :unicorn_user, "user"
+set :rainbows_user, "user"
 
-# number of unicorn workers
+# number of rainbows workers
 # default value: 2
-set :unicorn_workers, 2
+set :rainbows_workers, 2
 
 # local path to file with certificate, only makes sense if `nginx_use_ssl` is set
 # this file will be copied to remote server
@@ -148,26 +148,26 @@ set :nginx_ssl_certificate_local_path, "/home/ivalkeen/ssl/myssl.cert"
 set :nginx_ssl_certificate_key_local_path, "/home/ivalkeen/ssl/myssl.key"
 ```
 
-For example, of you site name is `example.com` and you want to use 4 unicorn workers,
+For example, of you site name is `example.com` and you want to use 4 rainbows workers,
 your `deploy.rb` will look like this:
 
 ```ruby
 set :nginx_server_name, "example.com"
-set :unicorn_workers, 4
+set :rainbows_workers, 4
 ```
 
 ### Template Customization
 
 If you want to change default templates, you can generate them using `rails generator`
 
-    rails g capistrano:nginx_unicorn:config
+    rails g capistrano:nginx_rainbows:config
 
 This will copy default templates to `config/deploy/templates` directory,
 so you can customize them as you like, and capistrano tasks will use this templates instead of default.
 
 You can also provide path, where to generate templates:
 
-    rails g capistrano:nginx_unicorn:config config/templates
+    rails g capistrano:nginx_rainbows:config config/templates
 
 # TODO:
 
