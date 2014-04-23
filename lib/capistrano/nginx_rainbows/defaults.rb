@@ -18,4 +18,5 @@ set :rainbows_log, -> { shared_path.join("log/rainbows.log") }
 set :rainbows_user, -> { fetch(:user) }
 set :rainbows_workers, 2
 set :rainbows_env, -> { fetch(:rails_env) == "staging" ? "staging" : "production" }
+set :rainbows_fail_timeout, -> { 30 }
 set :sudo, "sudo"
