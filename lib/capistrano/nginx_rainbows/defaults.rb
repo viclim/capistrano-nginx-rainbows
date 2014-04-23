@@ -17,5 +17,5 @@ set :rainbows_config, -> { shared_path.join("config/rainbows.rb") }
 set :rainbows_log, -> { shared_path.join("log/rainbows.log") }
 set :rainbows_user, -> { fetch(:user) }
 set :rainbows_workers, 2
-set :rainbows_rack_env, -> { fetch(:rails_env) == "production" ? "production" : "staging" }
+set :rainbows_rack_env, -> { fetch(:rails_env) == "development" ? "development" : "deployment" }
 set :sudo, "sudo"
