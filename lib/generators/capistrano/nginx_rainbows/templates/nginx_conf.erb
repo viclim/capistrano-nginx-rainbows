@@ -1,5 +1,5 @@
 upstream rainbows_<%= fetch(:nginx_config_name) %> {
-  server unix:/tmp/rainbows.<%= fetch(:nginx_config_name) %>.sock fail_timeout=0;
+  server unix:<%= "/home/#{fetch(:user)}/apps/#{fetch(:application)}/shared/tmp/sockets/rainbows.sock" %> fail_timeout=<%= fetch(:rainbows_fail_timeout) %>;
 }
 
 <% if fetch(:nginx_use_ssl) %>
