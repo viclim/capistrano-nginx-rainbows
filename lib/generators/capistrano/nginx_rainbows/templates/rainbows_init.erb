@@ -16,7 +16,7 @@ APP_ROOT=<%= current_path %>
 PID=<%= fetch(:rainbows_pid) %>
 
 # no rvm and no rbenv
-CMD="cd $APP_ROOT; bundle exec <%= fetch(:rainbows_bin) %> -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env) %>"
+CMD="cd $APP_ROOT; bundle exec <%= fetch(:rainbows_bin) %> -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rainbows_rack_env) %>"
 
 # rvm
 #CMD="cd <%= current_path %>; <%= fetch(:rvm_path) %>/bin/rvm do bundle exec rainbows -D -c <%= fetch(:rainbows_config) %> -E <%= fetch(:rails_env) %>"
